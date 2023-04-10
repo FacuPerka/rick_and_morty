@@ -1,20 +1,22 @@
-import SearchBar from "./SearchBar";
 import { Link, useLocation } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 const Nav = ({ onSearch }) => {
   const location = useLocation();
-  const isHomePage = location.pathname === "/";
+  const isHome = location.pathname === "/home";
 
   return (
-    <div>
-      <Link to="/about">
-        <button>About</button>
-      </Link>
-      <Link to="/">
-        <button>Home</button>
-      </Link>
-      {isHomePage && <SearchBar onSearch={onSearch} />}
-    </div>
+     <nav>
+        <Link to="/about">
+           <button>About</button>
+        </Link>
+        <Link to="/home">
+           <button>Home</button>
+        </Link>
+        {isHome && (
+          <SearchBar onSearch={onSearch} />
+        )}
+     </nav>
   );
 };
 
