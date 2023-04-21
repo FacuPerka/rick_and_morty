@@ -1,15 +1,11 @@
 const http = require("http");
-const data = require("./utils/data");
+const { getCharById } = require('./controllers/getCharById');
 
 http.createServer((req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   if (req.url.includes("/rickandmorty/character")) {
-    const id = req.url.split("/").at(-1);
-    const characterFound = data.find((character) => {
-      return character.id === +id;
-    });
-    return res.writeHead(200, { "Content-Type": "application/json" }).end(JSON.stringify(characterFound));
-  }
-}).listen(3025);
+    const id = req.url.split('/').at(-1);
 
-//En node 18 poner puerto unicamente. sin el Localhost.
+    getCharById(res, +id);
+  }
+}).listen(3025, 'localhost');
